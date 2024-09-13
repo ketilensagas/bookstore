@@ -82,7 +82,7 @@ WSGI_APPLICATION = "bookstore.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
+        "ENGINE":  os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
         "NAME":  os.environ.get("SQL_DATABASE", BASE_DIR / "db.sqlite3"),
         "USER": os.environ.get("SQL_USER", "user"),
         "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
@@ -148,6 +148,7 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
-#SECRET_KEY = os.environ.get("SECRET_KEY")
-#DEBUG = int(os.environ.get("DEBUG", default=0))
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 

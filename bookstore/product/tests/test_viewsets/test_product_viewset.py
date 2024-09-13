@@ -46,15 +46,18 @@ class TestProductViewSet(APITestCase):
         self.client.credentials(HTTP_AUTHORIZATION="Token " + token.key)
         category = CategoryFactory()
         data = json.dumps(
-            {"title": "notebook", "price": 800.00,
-                "categories_id": [category.id]}
-        )
+            {"title": "notebook",
+              "price": 800.00,
+                "category": [category.id]
+        })
 
         response = self.client.post(
             reverse("product-list", kwargs={"version": "v1"}),
             data=data,
             content_type="application/json",
         )
+
+        print(response.content)
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
