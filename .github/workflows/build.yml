@@ -27,6 +27,9 @@ jobs:
 
     - name: View poetry --help
       run: poetry --help
+      
+    - name: Navigate to bookstore directory 
+      run: cd bookstore
 
     - name: Install dependencies
       shell: bash
