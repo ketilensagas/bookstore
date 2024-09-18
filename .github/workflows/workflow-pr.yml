@@ -10,7 +10,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@master
         with:
-          python-version: 3.8
+          python-version: 3.12
       - name: Install poetry
         run: |
           pip install -U pip
@@ -24,11 +24,15 @@ jobs:
 
       - name: Install dependencies
         shell: bash
-        run: python -m poetry install
+        run: |
+          cd bookstore
+          poetry install
 
       - name: Test
         run: |
+          cd bookstore
           poetry run python manage.py test
+          
       - name: Wemake Python Stylguide
         uses: wemake-services/wemake-python-styleguide@0.16.0
         continue-on-error: true
