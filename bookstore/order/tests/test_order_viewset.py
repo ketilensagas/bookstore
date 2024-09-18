@@ -45,13 +45,19 @@ class TestOrderViewSet(APITestCase):
     def test_create_order(self):
         user = UserFactory()
         product = ProductFactory()
-        data = json.dumps({"products_id": [product.id], "user": user.id})
 
+        data = json.dumps({
+            "products_id": [product.id],
+              "user": user.id})
+                
         response = self.client.post(
             reverse("order-list", kwargs={"version": "v1"}),
             data=data,
             content_type="application/json",
         )
+
+        print(f"Response Data: {response.data}")
+        print(f"Response Status Code: {response.status_code}")
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
