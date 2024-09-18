@@ -33,8 +33,11 @@ jobs:
 
     - name: Install dependencies
       shell: bash
-      run: poetry install
+      run: |
+        cd bookstore
+        poetry install
 
     - name: Test
       run: |
+        cd bookstore
         poetry run python manage.py test
